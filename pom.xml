@@ -9,11 +9,12 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <geotools.version>30-SNAPSHOT</geotools.version>
         <maven.deploy.skip>true</maven.deploy.skip>
+        <matsim.version>13.0</matsim.version>
     </properties>
 
     <repositories>
@@ -33,9 +34,9 @@
             <releases><enabled>false</enabled></releases>
         </repository>
         <repository>
-            <!-- Repository for MATSim releases and snapshots (MATSim is not on Maven central) -->
             <id>matsim</id>
-            <url>https://repo.matsim.org/repository/matsim</url>
+            <name>MATSim Maven repository</name>
+            <url>https://repo.matsim.org/repository/matsim/</url>
         </repository>
         <!-- for dependencies of osm-network-reader -->
         <repository>
@@ -55,14 +56,15 @@
 
     <dependencies>
         <dependency>
+            <!-- This is the matsim "core": -->
             <groupId>org.matsim</groupId>
             <artifactId>matsim</artifactId>
-            <version>14.0</version> <!-- Replace with the desired version -->
+            <version>${matsim.version}</version>
         </dependency>
         <dependency>
             <groupId>org.matsim.contrib</groupId>
             <artifactId>osm</artifactId>
-            <version>14.0</version> <!-- Replace with the desired version -->
+            <version>${matsim.version}</version> <!-- Replace with the desired version -->
         </dependency>
         <dependency>
             <groupId>org.geotools</groupId>
@@ -77,8 +79,20 @@
         <dependency>
             <groupId>org.matsim</groupId>
             <artifactId>pt2matsim</artifactId>
-            <version>22.11</version>
+            <version>22.3</version>
         </dependency>
+        <dependency>
+            <groupId>org.matsim.contrib</groupId>
+            <artifactId>sbb-extensions</artifactId>
+            <version>13.0</version>
+            <!-- (replace this with the version of MATSim you are using, such as the current snapshot) -->
+        </dependency>
+        <dependency>
+            <groupId>org.opentripplanner</groupId>
+            <artifactId>otp</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
 
 
 
@@ -91,8 +105,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.10.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>15</source>
+                    <target>15</target>
                 </configuration>
             </plugin>
             <plugin>

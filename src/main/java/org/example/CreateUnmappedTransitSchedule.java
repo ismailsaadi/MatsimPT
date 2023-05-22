@@ -1,9 +1,6 @@
 package org.example;
 
 import org.matsim.pt2matsim.run.Gtfs2TransitSchedule;
-import org.example.CreateMappedTransitSchedule;
-import org.matsim.pt2matsim.tools.ScheduleTools;
-import org.matsim.pt2matsim.tools.NetworkTools;
 
 public class CreateUnmappedTransitSchedule {
     public static void main(String [] args){
@@ -19,7 +16,7 @@ public class CreateUnmappedTransitSchedule {
 
         Gtfs2TransitSchedule.run(args[0],
                 "dayWithMostTrips",
-                "EPSG:31370",
+                "EPSG:27700",
                 args[1],
                 args[2]);
 
