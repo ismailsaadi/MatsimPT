@@ -17,7 +17,7 @@ public class CreateMappedTransitSchedule {
         createMapperConfigFile("data/config/MapperConfigAdjusted.xml");
 
         // Map the schedule using the config
-        PublicTransitMapper.main(new String[]{"data/config/MapperConfigAdjusted.xml"});
+        //PublicTransitMapper.main(new String[]{"data/config/MapperConfigAdjusted.xml"});
 
         // setup public transit mapper
         //PublicTransitMappingConfigGroup DefaultMapperConfig = new CreateDefaultPTMapperConfig().;
@@ -45,7 +45,7 @@ public class CreateMappedTransitSchedule {
     /**
      * 	The core of the PT2MATSim-package is the mapping process of the schedule to the network.
      * 	The unmapped schedule of GManchester (previously converted from GTFS) is mapped
-     * 	to the converted OSM network of the Waterloo Area, Canada.
+     * 	to the converted OSM network.
      */
     public static void createMapperConfigFile(String configFile) {
 
@@ -65,6 +65,12 @@ public class CreateMappedTransitSchedule {
         ptmConfig.setOutputNetworkFile("data/out/MappedNetwork.xml.gz");
         ptmConfig.setOutputScheduleFile("data/out/MappedTransitSchedule.xml.gz");
         ptmConfig.setOutputStreetNetworkFile( "data/out/MappedStreetNetwork.xml.gz");
+
+        PublicTransitMappingConfigGroup.TransportModeAssignment mraBus = new PublicTransitMappingConfigGroup.TransportModeAssignment("bus");
+
+        System.out.print(mraBus.getNetworkModes());
+        //mraBus.setNetworkModesStr("car,bus");
+        //config.addParameterSet(mraBus);
 
         //ptmConfig.setScheduleFreespeedModes(CollectionUtils.stringToSet("rail, light_rail"));
         // Save the mapping config
