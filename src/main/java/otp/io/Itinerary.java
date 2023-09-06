@@ -3,10 +3,10 @@ package otp.io;
 import com.opencsv.bean.CsvBindByPosition;
 
 public class Itinerary {
-    @CsvBindByPosition(position = 1)
+    @CsvBindByPosition(position = 0)
     public String idNumber;
 
-    @CsvBindByPosition(position = 0)
+    @CsvBindByPosition(position = 1)
     public double personNumber;
 
     @CsvBindByPosition(position = 2)

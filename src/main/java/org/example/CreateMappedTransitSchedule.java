@@ -66,6 +66,8 @@ public class CreateMappedTransitSchedule {
         ptmConfig.setOutputScheduleFile("data/out/MappedTransitSchedule.xml.gz");
         ptmConfig.setOutputStreetNetworkFile( "data/out/MappedStreetNetwork.xml.gz");
 
+        ptmConfig.setNumOfThreads(8);
+
         // travelCostType, transportModeAssignment
 
         //ptmConfig.setTravelCostType();
