@@ -66,11 +66,24 @@ public class CreateMappedTransitSchedule {
         ptmConfig.setOutputScheduleFile("data/out/MappedTransitSchedule.xml.gz");
         ptmConfig.setOutputStreetNetworkFile( "data/out/MappedStreetNetwork.xml.gz");
 
-        PublicTransitMappingConfigGroup.TransportModeAssignment mraBus = new PublicTransitMappingConfigGroup.TransportModeAssignment("bus");
+        // travelCostType, transportModeAssignment
 
-        System.out.print(mraBus.getNetworkModes());
-        //mraBus.setNetworkModesStr("car,bus");
-        //config.addParameterSet(mraBus);
+        //ptmConfig.setTravelCostType();
+
+
+
+        // bus routes can be assigned onto links where "car" and "bus" are allowed
+        PublicTransitMappingConfigGroup.TransportModeAssignment mraBus = new PublicTransitMappingConfigGroup.TransportModeAssignment("bus");
+        mraBus.setNetworkModesStr("car,bus");
+        ptmConfig.addParameterSet(mraBus);
+/*
+        // tram routes can be assigned onto links where "car" and "bus" are allowed
+        PublicTransitMappingConfigGroup.TransportModeAssignment mraTram = new PublicTransitMappingConfigGroup.TransportModeAssignment("tram");
+        mraTram.setNetworkModesStr("car,bus");
+        ptmConfig.addParameterSet(mraTram);
+
+         */
+
 
         //ptmConfig.setScheduleFreespeedModes(CollectionUtils.stringToSet("rail, light_rail"));
         // Save the mapping config

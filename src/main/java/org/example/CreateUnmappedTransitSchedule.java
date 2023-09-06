@@ -11,9 +11,6 @@ public class CreateUnmappedTransitSchedule {
                     "(2) Transit vehicles output file");
         }
 
-
-
-
         Gtfs2TransitSchedule.run(args[0],
                 "dayWithMostTrips",
                 "EPSG:27700",
