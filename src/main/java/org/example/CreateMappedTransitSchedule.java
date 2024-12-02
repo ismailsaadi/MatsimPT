@@ -4,7 +4,7 @@ import org.matsim.core.config.Config;
 import org.matsim.core.config.ConfigUtils;
 import org.matsim.core.config.ConfigWriter;
 import org.matsim.pt2matsim.config.PublicTransitMappingConfigGroup;
-import org.matsim.pt2matsim.run.PublicTransitMapper;
+//import org.matsim.pt2matsim.run.PublicTransitMapper;
 import org.matsim.pt2matsim.run.CreateDefaultPTMapperConfig;
 
 public class CreateMappedTransitSchedule {
@@ -50,23 +50,27 @@ public class CreateMappedTransitSchedule {
     public static void createMapperConfigFile(String configFile) {
 
         // Create a mapping config:
-        CreateDefaultPTMapperConfig.main(new String[]{ "data/config/MapperConfigDefault.xml"});
+        CreateDefaultPTMapperConfig.main(new String[]{ "data/config/MapperConfigDefaultMelbourne.xml"});
         // Open the mapping config and set the parameters to the required values
         // (usually done manually by opening the config with a simple editor)
         Config config = ConfigUtils.loadConfig(
-                "data/config/MapperConfigDefault.xml",
+                "data/config/MapperConfigDefaultMelbourne.xml",
                 PublicTransitMappingConfigGroup.createDefaultConfig());
-        config.global().setCoordinateSystem("EPSG:27700");
+        //config.global().setCoordinateSystem("EPSG:27700"); //Man
+        config.global().setCoordinateSystem("EPSG:28355"); // Melb
         PublicTransitMappingConfigGroup ptmConfig = ConfigUtils.addOrGetModule(config, PublicTransitMappingConfigGroup.class);
 
-        ptmConfig.setInputNetworkFile("data/in/network.xml");
-        ptmConfig.setInputScheduleFile( "data/out/UnmappedTransitSchedule.xml");
+        //ptmConfig.setInputNetworkFile("data/in/network.xml");
+        //ptmConfig.setInputScheduleFile( "data/out/UnmappedTransitSchedule.xml");
 
-        ptmConfig.setOutputNetworkFile("data/out/MappedNetwork.xml.gz");
-        ptmConfig.setOutputScheduleFile("data/out/MappedTransitSchedule.xml.gz");
-        ptmConfig.setOutputStreetNetworkFile( "data/out/MappedStreetNetwork.xml.gz");
+        ptmConfig.setInputNetworkFile("data/melbourne/network.xml.gz");
+        ptmConfig.setInputScheduleFile( "data/melbourne/transitSchedule.xml");
 
-        ptmConfig.setNumOfThreads(8);
+        ptmConfig.setOutputNetworkFile("data/melbourne/mappedNetwork.xml.gz");
+        ptmConfig.setOutputScheduleFile("data/melbourne/mappedTransitSchedule.xml.gz");
+        ptmConfig.setOutputStreetNetworkFile( "data/melbourne/mappedStreetNetwork.xml.gz");
+
+        ptmConfig.setNumOfThreads(16);
 
         // travelCostType, transportModeAssignment
 
@@ -85,7 +89,6 @@ public class CreateMappedTransitSchedule {
         ptmConfig.addParameterSet(mraTram);
 
          */
-
 
         //ptmConfig.setScheduleFreespeedModes(CollectionUtils.stringToSet("rail, light_rail"));
         // Save the mapping config
