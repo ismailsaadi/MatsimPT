@@ -2,6 +2,7 @@ package org.example;
 
 import org.matsim.pt2matsim.run.Gtfs2TransitSchedule;
 
+
 public class CreateUnmappedTransitSchedule {
     public static void main(String [] args){
         if(args.length != 3) {
@@ -13,7 +14,7 @@ public class CreateUnmappedTransitSchedule {
 
         Gtfs2TransitSchedule.run(args[0],
                 "dayWithMostTrips",
-                "EPSG:27700",
+                "EPSG:28355", // UK-Manchester is EPSG:27700 - AU-Melbourne is EPSG:28355
                 args[1],
                 args[2]);
 

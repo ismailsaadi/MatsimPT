@@ -26,14 +26,20 @@ import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
 
 // import otp.io.TripSurveyAttributes;
+//import org.geotools.api.referencing.operation.MathTransform;
+import org.locationtech.jts.geom.Geometry;
+import org.opengis.referencing.crs.CoordinateReferenceSystem;
+import org.opengis.referencing.operation.MathTransform;
 import otp.io.Itinerary;
 
 import org.geotools.geometry.jts.JTS;
 import org.geotools.referencing.CRS;
-import org.opengis.referencing.crs.CoordinateReferenceSystem;
-import org.opengis.referencing.operation.MathTransform;
-import org.opengis.geometry.coordinate.PointArray;
-import org.opengis.referencing.FactoryException;
+//import org.opengis.referencing.crs.CoordinateReferenceSystem;
+//import org.opengis.referencing.operation.MathTransform;
+
+//import org.geotools.api.referencing.crs.CoordinateReferenceSystem;
+//import org.opengis.geometry.coordinate.PointArray;
+//import org.opengis.referencing.FactoryException;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
@@ -43,12 +49,18 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
 public class PTindicators {
-    private static final String file = "/Users/ismailsaadi/IdeaProjects/matsim-jibe/TfGM/tripsWithXY.csv";
     private static Logger logger = LogManager.getLogger(PTindicators.class);
     private static List<String[]> allData;
 
-
     public static void main(String[] args) {
+
+        String file = args[0];
+
+        // output CSV file
+        String csvFilePath = "ptIndicatorsOTP.csv";
+
+        //List<String[]> allData;
+
         Locale usLocale = new Locale("en", "US");
 
         DecimalFormat decimalFormat = new DecimalFormat("0.#####", new DecimalFormatSymbols(usLocale));
@@ -141,9 +153,6 @@ public class PTindicators {
             }
         }
 
-        // write csv
-        String csvFilePath = "ptIndicatorsOTP.csv";
-
         try (CSVWriter writer = new CSVWriter(new FileWriter(csvFilePath))) {
             String[] header = {"idNumber", "personNumber", "tripNumber", "itineraryNumber", "duration", "walkTime", "transitTime", "waitingTime", "walkDistance", "transfers"};
             writer.writeNext(header);
@@ -188,7 +197,7 @@ public class PTindicators {
             MathTransform transform = CRS.findMathTransform(ukCRS, epsg4326);
 
             // Transform the point from the UK coordinate system to EPSG 4326
-            Point pointInWGS84 = (Point) JTS.transform(pointInUK, transform);
+            Point pointInWGS84 = (Point) JTS.transform((Geometry) pointInUK,  transform);
 
             // Retrieve the transformed coordinates
             double transformedX = pointInWGS84.getX();
